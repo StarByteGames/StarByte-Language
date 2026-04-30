@@ -1,0 +1,139 @@
+// =====================================================================
+//  StarByte syntax-highlighting showcase
+//  This file exercises every token class supported by the extension.
+// =====================================================================
+
+/*
+ * Multi-line comment.
+ * Demonstrates block comments.
+ */
+
+module System.Console;
+module Math;
+
+#define MAX_ITEMS 16
+#if STARBYTE_DEBUG
+    // Debug-only block
+#endif
+
+// ---- Enums ----------------------------------------------------------
+enum Color {
+    RED,
+    GREEN  = 10,
+    BLUE
+};
+
+// ---- Structs --------------------------------------------------------
+struct Point {
+    int x;
+    int y;
+};
+
+// ---- Classes & Interfaces ------------------------------------------
+interface IDrawable {
+    void draw();
+}
+
+class Shape implements IDrawable {
+    protected string name = "shape";
+
+    public Shape(string n) {
+        this.name = n;
+    }
+
+    public void draw() {
+        Console.WriteLine("drawing", this.name);
+    }
+}
+
+class Circle extends Shape {
+    private float radius;
+
+    public Circle(float r) {
+        super("circle");
+        this.radius = r;
+    }
+}
+
+// ---- Functions ------------------------------------------------------
+int add(int a, int b) {
+    return a + b;
+}
+
+float average(float a, float b) {
+    return (a + b) / 2.0;
+}
+
+// ---- Control flow & literals ---------------------------------------
+int main() {
+    const int N      = 10;
+    int      hex     = 0xFF;
+    int      bits    = 0b1010_1010;       // (binary literal demo)
+    float    pi      = 3.14159;
+    float    sci     = 1.5e-3;
+    char     letter  = 'A';
+    char     newline = '\n';
+    string   greet   = "Hello,\tStarByte!\n";
+    bool     ok      = true;
+    bool     done    = false;
+    Point    p       = {3, 4};
+    Shape    s       = new Circle(2.5);
+
+    // if / else
+    if (N > 0 && ok) {
+        Console.WriteLine("positive");
+    } else if (N == 0) {
+        Console.WriteLine("zero");
+    } else {
+        Console.WriteLine("negative");
+    }
+
+    // for loop with bitwise + compound assignment
+    for (int i = 0; i < N; i++) {
+        int mask = (i << 1) | 1;
+        mask &= 0x0F;
+        Console.WriteLine(i, mask);
+    }
+
+    // while loop
+    int n = N;
+    while (n > 0) {
+        n -= 1;
+        if (n == 5) continue;
+        if (n == 2) break;
+    }
+
+    // do/while
+    do {
+        n++;
+    } while (n < N);
+
+    // switch
+    switch (letter) {
+        case 'A': Console.WriteLine("ay"); break;
+        case 'B': Console.WriteLine("bee"); break;
+        default:  Console.WriteLine("other"); break;
+    }
+
+    // ---- Memory -----------------------------------------------------
+    int buf = alloc(MAX_ITEMS);
+    buf[0]  = 42;
+    Console.WriteLine(buf[0], len(buf));
+    free(buf);
+
+    int gced = gc_alloc(4);
+    gced[0]  = "managed";
+    gc_collect();
+
+    // ---- Exceptions -------------------------------------------------
+    try {
+        if (!ok) throw "not ok";
+        Console.WriteLine(add(2, 3));
+    } catch (string e) {
+        Console.WriteLine("caught:", e);
+    } finally {
+        Console.WriteLine("done");
+    }
+
+    return 0;
+}
