@@ -2,7 +2,7 @@
   "name": "starbyte-language",
   "displayName": "StarByte-Language",
   "description": "Syntax highlighting and language support for StarByte (.sb) source files.",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "publisher": "StarByteGames",
   "license": "MIT",
   "repository": {
@@ -14,7 +14,7 @@
   },
   "homepage": "https://github.com/StarByteGames/starbyte-language#readme",
   "engines": {
-    "vscode": "^1.118.0"
+    "vscode": "^1.60.0"
   },
   "categories": [
     "Programming Languages"

@@ -4,6 +4,12 @@ All notable changes to the "starbyte-language" extension will be documented in t
 
 Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to structure this file.
 
+## [0.1.1] - 2026-04-30
+
+### Changed
+- Lowered minimum required VS Code version from `^1.118.0` to `^1.60.0`
+  for broader compatibility with older VS Code installations.
+
 ## [0.1.0] - 2026-04-30
 
 ### Added
